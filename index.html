@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monex Store</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Arquivo do PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* ============================= */
+    /* ESTILOS MODERNOS */
+    /* ============================= */
+    body { background:#000; font-family: Inter, Roboto, sans-serif; }
+
+    .app-card {
+      border-radius:14px;
+      background: #3F4E4F;      backdrop-filter: blur(10px);
+      border: 1px solid #3F4E4F;
+      transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      overflow:hidden;
+      position: relative;
+    }
+
+    .app-card::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg,#3F4E4F, #3F4E4F, #3F4E4F);
+      opacity: 0;
+      transition: opacity 0.5s;
+      filter: blur(30px);
+      z-index: 0;
+    }
+
+    .app-card:hover::before { opacity: 1; }
+    .app-card:hover { transform: translateY(-6px); box-shadow: 0 0 30px #00ff00; border-color: #00e676; }
+    .app-card img, .app-card .card-body { position: relative; z-index: 1; }
+
+    .app-thumb { height:150px; width:100%; object-fit:cover; }
+    .badge-new { background:#00e676; color:#000; font-weight:bold; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); opacity:1; } 50% { transform: scale(1.1); opacity:0.8; } 100% { transform: scale(1); opacity:1; } }
+
+    #search { transition: box-shadow 0.3s; }
+    #search:focus { box-shadow: 0 0 10px #00ff99; border-color: #00e676; outline: none; }
+
+    .btn-primary { background:#00c853; border:none; transition: all 0.3s; box-shadow: 0 0 5px #00c853; }
+    .btn-primary:hover { background:#00e676; box-shadow: 0 0 20px #00ff99, 0 0 40px #00e676; transform: translateY(-2px); }
+
+    .carousel-inner .carousel-item { transition: transform 0.5s ease, box-shadow 0.5s ease; }
+    .carousel-inner .carousel-item:hover { box-shadow: 0 0 40px #00ff99; transform: scale(1.03); border-radius:12px; }
+
+    .hero { background:#3F4E4F; padding:32px 0; }
+    .carousel { border:3px solid green; border-radius:12px; }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: green;">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="#">Monex Store</a>
+    <form class="d-flex ms-auto">
+      <input id="search" class="form-control" type="search" placeholder="Buscar apps...">
+    </form>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero mb-4">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div>
+      <h1 class="h3 text-white mb-1">Bem-vindo à sua Monex Store</h1>
+      <p class="text-white">Apps criados por você e seu irmão.</p>
+    </div>
+    <a class="btn btn-primary">Enviar App</a>
+  </div>
+</header>
+
+<!-- CAROUSEL -->
+<main class="container mb-5">
+  <div id="highlightCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+    <div class="carousel-inner" id="carouselInner"></div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#highlightCarousel" data-bs-slide="prev" aria-label="Anterior">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#highlightCarousel" data-bs-slide="next" aria-label="Próximo">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Lista de apps -->
+  <div class="row g-3" id="appsList"></div>
+</main>
+
+<!-- RODAPÉ -->
+<footer class="py-4 bg-white text-center">
+  <small class="text-muted">© <span id="year"></span> Monex Store</small>
+</footer>
+
+<!-- MODAL DE DETALHES -->
+<div class="modal fade" id="appModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <img id="modalThumb" class="img-fluid rounded mb-3" />
+        <p id="modalDesc"></p>
+        <p><strong>Categoria:</strong> <span id="modalCategory"></span></p>
+        <p><strong>Downloads:</strong> <span id="modalDownloads"></span></p>
+        <p><strong>Avaliação:</strong> ⭐ <span id="modalRating"></span></p>
+      </div>
+      <div class="modal-footer">
+        <a id="modalDownload" href="#" class="btn btn-primary">Baixar</a>
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+const apps = [
+  { id: 1, title: "Cinema APK", desc: "Assistir filmes grátis.", thumb: "img/cinema apk.jpg", category: "Utilitários", downloads: 1245, rating: 4.5, featured: true, new: true, link: "https://drive.google.com/file/d/1HAapfp5Gxrhb-NXOZk9hLGIjruWXBDJq/view?usp=sharing" },
+  { id: 2, title: "Jogo Rápido", desc: "Jogo simples e viciante.", thumb: "https://picsum.photos/seed/b/600/400", category: "Jogos", downloads: 987, rating: 4.2, featured: false, new: false, link: "https://seu-link-jogo.com" },
+  { id: 3, title: "EstudaFácil", desc: "Resumos de estudo rápidos.", thumb: "https://picsum.photos/seed/c/600/400", category: "Educação", downloads: 543, rating: 4.8, featured: true, new: false, link: "https://seu-link-estuda.com" }
+];
+
+function renderCarousel() {
+  const inner = document.getElementById("carouselInner");
+  const featured = apps.filter(a => a.featured);
+  inner.innerHTML = featured.map((a, i) => `
+    <div class="carousel-item ${i===0 ? "active":""}">
+      <div class="d-flex align-items-center p-4 bg-white rounded-3">
+        <img src="${a.thumb}" class="me-4 rounded" style="width:180px;height:120px;object-fit:cover;">
+        <div>
+          <h5>${a.title}</h5>
+          <p class="text-muted">${a.desc}</p>
+          <button onclick="openDetails(${a.id})" class="btn btn-sm btn-outline-primary mt-2">Ver app</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function openDetails(id) {
+  const a = apps.find(x => x.id === id);
+  document.getElementById("modalTitle").innerText = a.title;
+  document.getElementById("modalDesc").innerText = a.desc;
+  document.getElementById("modalCategory").innerText = a.category;
+  document.getElementById("modalDownloads").innerText = a.downloads;
+  document.getElementById("modalRating").innerText = a.rating;
+  document.getElementById("modalThumb").src = a.thumb;
+  document.getElementById("modalDownload").href = a.link;
+  new bootstrap.Modal(document.getElementById("appModal")).show();
+}
+
+function addDownload(id, event) {
+  if(event) event.preventDefault();
+  const a = apps.find(x => x.id === id);
+  a.downloads++;
+  renderApps();
+  renderCarousel();
+}
+
+function renderApps(filter="") {
+  const list = document.getElementById("appsList");
+  const q = filter.toLowerCase();
+  const filtered = apps.filter(a => a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q) || a.category.toLowerCase().includes(q));
+  list.innerHTML = filtered.map(a => `
+    <div class="col-12 col-md-6 col-lg-4 fade-in">
+      <div class="app-card p-0">
+        <img src="${a.thumb}" class="app-thumb">
+        <div class="card-body text-white">
+          <div class="d-flex justify-content-between">
+            <h5 class="card-title">${a.title}</h5>
+            ${a.new ? `<span class="badge badge-new">Novo</span>` : ""}
+          </div>
+          <p class="small text-muted">${a.category} • ${a.downloads} downloads</p>
+          <p>${a.desc}</p>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <div><strong>${a.rating}</strong>★</div>
+            <div>
+              <a onclick="addDownload(${a.id}, event)" href="#" class="btn btn-sm btn-primary">Baixar</a>
+              <button onclick="openDetails(${a.id})" class="btn btn-sm btn-outline-light">Detalhes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join("");
+  document.querySelectorAll('.fade-in').forEach((el,i)=>{
+    el.style.opacity=0; el.style.transition=`opacity 0.5s ${i*0.1}s`;
+    requestAnimationFrame(()=>el.style.opacity=1);
+  });
+}
+
+document.getElementById("search").addEventListener("input", e => renderApps(e.target.value));
+document.getElementById("year").innerText = new Date().getFullYear();
+
+renderCarousel();
+renderApps();
+
+if("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js");
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
