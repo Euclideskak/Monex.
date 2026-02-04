@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monex Store</title> <!--nome de site, que fica la em cima da barra-->
+    <link rel="stylesheet" href="style.css">
+    <!--esse comando esta chamnado o css que esta aqui dentro do html esta em outro arquivo-->
+    <script src="https://cdn.tailwindcss.com"></script> <!--serve pra ativar o Tailwind CSS no seu site-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!--serve pra ativar a biblioteca Feather Icons no seu site-->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script> <!--Carrega a biblioteca Feather Icons no seu site
+ Permite usar ícones em SVG
+ Deixa você usar tags tipo:-->
+ <link rel="stylesheet" href="style.css">
+<script src="components/navbar.js"></script>
+<script src="components/footer.js"></script>
+<script src="script.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+ <style>
+    .profile-img {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2ebc2e;
+    margin: 0;
+    display: block;
+    cursor: zoom-in;
+}
+
+.profile-img-member {
+    width: 40px;
+    height: 40px;
+}
+
+ </style>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        steam: {
+                            50: '#e6f7e6',
+                            100: '#c2eac2',
+                            200: '#99dd99',
+                            300: '#70d070',
+                            400: '#4fc64f',
+                            500: '#2ebc2e',
+                            600: '#29b029',
+                            700: '#239d23',
+                            800: '#1d8b1d',
+                            900: '#126b12',
+                        }
+                    }
+                }
+            }
+        }
+    </script> <!--Ele personaliza o Tailwind CSS
+ É tipo um “painel de configurações” do Tailwind
+ Só funciona porque você está usando o Tailwind via CDN-->
+</head>
+
+<body class="bg-gray-900 text-gray-100">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Banner -->
+        <section class="relative rounded-lg overflow-hidden mb-8 h-96">
+            <img src="http://static.photos/gaming/1200x630/42" alt="Featured Game" class="w-full h-full object-cover">
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent flex items-end p-8">
+                <div>
+                    <span class="bg-steam-500 text-white px-3 py-1 rounded-full text-sm font-medium">NEW RELEASE</span>
+                    <h1 class="text-4xl font-bold mt-2">Cyberpunk Adventure</h1>
+                    <p class="text-xl mt-2 max-w-2xl">Explore the neon-lit streets of the future in this groundbreaking
+                        RPG</p>
+                    <div class="flex items-center mt-4">
+                        <span class="bg-gray-800/80 px-3 py-1 rounded-md text-sm mr-2">-20%</span>
+                        <span class="text-2xl font-bold">$39.99</span>
+                        <span class="line-through text-gray-400 ml-2">$49.99</span>
+                    </div>
+                    <button
+                        class="mt-4 bg-steam-500 hover:bg-steam-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Games -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Featured & Recommended</h2>
+                <a href="#" class="text-steam-400 hover:text-steam-300 text-sm font-medium">View all</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Game Card 1 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition-colors">
+                    <div class="relative">
+                        <img src="http://static.photos/gaming/320x240/101" alt="Game 1"
+                            class="w-full h-40 object-cover">
+                        <span
+                            class="absolute top-2 right-2 bg-gray-900/80 text-white text-xs px-2 py-1 rounded">-30%</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">Space Explorers</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center">
+                                <span class="text-yellow-400 mr-1">★</span>
+                                <span class="text-xs text-gray-400">4.7</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm font-medium">$29.99</span>
+                                <span class="line-through text-gray-400 text-xs ml-1">$42.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition-colors">
+                    <div class="relative">
+                        <img src="http://static.photos/gaming/320x240/102" alt="Game 2"
+                            class="w-full h-40 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">Zombie Survival</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center">
+                                <span class="text-yellow-400 mr-1">★</span>
+                                <span class="text-xs text-gray-400">4.2</span>
+                            </div>
+                            <div class="text-green-400 text-sm font-medium">$24.99</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition-colors">
+                    <div class="relative">
+                        <img src="http://static.photos/gaming/320x240/103" alt="Game 3"
+                            class="w-full h-40 object-cover">
+                        <span
+                            class="absolute top-2 right-2 bg-gray-900/80 text-white text-xs px-2 py-1 rounded">NEW</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">Racing Legends</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center">
+                                <span class="text-yellow-400 mr-1">★</span>
+                                <span class="text-xs text-gray-400">4.9</span>
+                            </div>
+                            <div class="text-green-400 text-sm font-medium">$49.99</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Card 4 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden hover:bg-gray-700 transition-colors">
+                    <div class="relative">
+                        <img src="http://static.photos/gaming/320x240/104" alt="Game 4"
+                            class="w-full h-40 object-cover">
+                        <span
+                            class="absolute top-2 right-2 bg-gray-900/80 text-white text-xs px-2 py-1 rounded">-50%</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-medium">Fantasy Kingdom</h3>
+                        <div class="flex justify-between items-center mt-2">
+                            <div class="flex items-center">
+                                <span class="text-yellow-400 mr-1">★</span>
+                                <span class="text-xs text-gray-400">4.5</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm font-medium">$19.99</span>
+                                <span class="line-through text-gray-400 text-xs ml-1">$39.99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">Special Offers</h2>
+                <a href="#" class="text-steam-400 hover:text-steam-300 text-sm font-medium">View all</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Big Offer 1 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden flex flex-col md:flex-row">
+                    <div class="md:w-1/2">
+                        <img src="http://static.photos/gaming/640x360/201" alt="Big Offer 1"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2 p-6 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">HOT
+                                DEAL</span>
+                            <h3 class="text-xl font-bold mt-2">Mega Bundle Pack</h3>
+                            <p class="text-gray-400 mt-2">5 amazing games in one incredible package. Save 75% compared
+                                to buying separately.</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-2xl font-bold">$59.99</span>
+                                <span class="line-through text-gray-400 text-lg ml-2">$239.95</span>
+                                <span class="bg-gray-700 text-white px-2 py-1 rounded-md text-xs ml-2">75% OFF</span>
+                            </div>
+                            <button
+                                class="mt-4 w-full bg-steam-500 hover:bg-steam-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
+                                Buy Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Big Offer 2 -->
+                <div class="bg-gray-800 rounded-lg overflow-hidden flex flex-col md:flex-row">
+                    <div class="md:w-1/2">
+                        <img src="http://static.photos/gaming/640x360/202" alt="Big Offer 2"
+                            class="w-full h-full object-cover">
+                    </div>
+                    <div class="md:w-1/2 p-6 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-steam-500 text-white px-3 py-1 rounded-full text-sm font-medium">LIMITED
+                                TIME</span>
+                            <h3 class="text-xl font-bold mt-2">Season Pass</h3>
+                            <p class="text-gray-400 mt-2">Get all current and future DLCs for this epic adventure. Never
+                                miss new content.</p>
+                        </div>
+                        <div class="mt-4">
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-2xl font-bold">$29.99</span>
+                                <span class="line-through text-gray-400 text-lg ml-2">$59.99</span>
+                                <span class="bg-gray-700 text-white px-2 py-1 rounded-md text-xs ml-2">50% OFF</span>
+                            </div>
+                            <button
+                                class="mt-4 w-full bg-steam-500 hover:bg-steam-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Browse by Category</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="sword" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">Action</span>
+                </a>
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="compass" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">Adventure</span>
+                </a>
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="cpu" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">Strategy</span>
+                </a>
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="target" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">FPS</span>
+                </a>
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="users" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">Multiplayer</span>
+                </a>
+                <a href="#"
+                    class="bg-gray-800 hover:bg-gray-700 rounded-lg p-4 flex flex-col items-center transition-colors">
+                    <div class="bg-steam-500/20 w-16 h-16 rounded-full flex items-center justify-center mb-2">
+                        <i data-feather="moon" class="text-steam-400"></i>
+                    </div>
+                    <span class="text-sm text-center">RPG</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>feather.replace();</script>
+    <script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
+</body>
+
+</html>
