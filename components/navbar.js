@@ -12,8 +12,8 @@ class CustomNavbar extends HTMLElement {
 
                 <!-- LINKS -->
                 <nav class="hidden lg:flex gap-6 text-sm">
-                    <a href="src/index.html" class="text-gray-400 hover:text-white">Loja</a>
-                    <a href="src/comunidade.html" class="text-gray-400 hover:text-white">Comunidade</a>
+                    <a href="index.html" class="text-gray-400 hover:text-white">Loja</a>
+                    <a href="comunidade.html" class="text-gray-400 hover:text-white">Comunidade</a>
                     <a href="#" class="text-gray-400 hover:text-white">Biblioteca</a>
                     <a href="#" class="text-gray-400 hover:text-white">Notícias</a>
                 </nav>
@@ -81,3 +81,4 @@ class CustomNavbar extends HTMLElement {
 }
 
 customElements.define("custom-navbar", CustomNavbar);
+
